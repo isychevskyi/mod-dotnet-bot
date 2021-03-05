@@ -1,0 +1,27 @@
+---
+layout: default
+title: Mod the dotnet-bot Gallery
+id: gallery
+permalink: /gallery/
+---
+
+
+<div class="py-6 my-4 my-lg-6" id="gallery">
+
+  <header class="container mb-5  text-center" data-animate-in="up" data-animate-in-delay="0.4">
+    <h2 class="h1 text-brand m-0">Gallery</h2>
+  </header>
+
+  <div class="container-md gallery">
+
+    {% for image in site.data.gallery %}
+    {% capture img %}/assets/images/gallery/{{ image.image }}{% endcapture %}
+    <figure data-animate-in="up">
+      <img src="{{ img | relative_url }}" alt="{% if image.alt %}{{ image.alt }}{% else %}Modded dotnet bot{% endif %}" />
+    </figure>
+    {% endfor %}
+
+    <span class="spacer"></span>
+  </div>
+
+</div>
