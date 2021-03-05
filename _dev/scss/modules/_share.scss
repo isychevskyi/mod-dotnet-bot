@@ -1,0 +1,292 @@
+// ---------------------------------------------------------------------
+// Share styles
+// ---------------------------------------------------------------------
+
+
+// ----------------------------------------
+//
+// ----------------------------------------
+
+#img,
+#image-file {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  @include visually-hidden;
+}
+
+#canvas {
+  @include visually-hidden;
+  position: absolute;
+  display: none;
+}
+
+#share-modal .modal {
+
+}
+
+#tweetPreviewImg {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+#tweet-preview {
+  position: relative;
+
+  textarea {
+    padding: 12px;
+    width: 100%;
+    margin: 12px auto;
+    display: block;
+    border-radius: 3px;
+    background: $gray-light;
+    color: $black;
+    resize: none;
+    min-height: 104px;
+    max-height: 184px;
+  }
+
+  .tweet-char-count {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: $gray-dark;
+    z-index: 3;
+    position: relative;
+  }
+
+  button {
+    background: $brand;
+    border-radius: 3px;
+    color: $white;
+    font-weight: 600;
+    padding: 8px 14px;
+    margin: 0;
+    display: block;
+    text-align: center;
+  }
+
+  .tweet-success {
+    display: none;
+    text-align: center;
+    padding: 16px 0;
+  }
+
+  &.success {
+    .tweet-content {
+      display: none;
+    }
+    .tweet-success {
+      display: block;
+    }
+  }
+
+  &.is-working {
+    position: relative;
+    z-index: 2;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: calc(50% - 22px);
+      left: calc(50% - 22px);
+      display: block;
+      width: 44px;
+      height: 44px;
+      z-index: 3;
+      transform-origin: center;
+      background: url('../images/svgs/loader.svg') center / cover no-repeat;
+      animation: rotation 2s infinite ease-in-out;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background: rgba($white, 0.8);
+      backdrop-filter: blur(1px);
+    }
+  }
+}
+
+#share-modal {
+
+  .tweet-success,
+  .tweet-error {
+    display: none;
+  }
+
+  //is working
+  .working-content {
+    display: none;
+  }
+
+  &.is-working {
+    .working-content {
+      display: flex;
+    }
+  }
+
+  // Success
+  &.success {
+    .tweet-success {
+      display: block;
+    }
+
+    .modal__content {
+      display: none;
+    }
+
+    &#tweet-preview {
+      display: none;
+    }
+  }
+
+  // error
+  &.error {
+    .tweet-error {
+      display: block;
+    }
+
+    .modal__content {
+      display: none;
+    }
+  }
+
+}
+
+
+.working-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  > * {
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    text-align: center;
+    width: 340px;
+    max-width: 92%;
+    margin: 0 auto;
+  }
+
+  .js-stop-tweet {
+    text-decoration: underline;
+    color: $brand;
+    transition: opacity $trans;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+
+  .wc-loader {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 24px;
+    z-index: 3;
+    transform-origin: center;
+    background: url('../images/svgs/loader.svg') center / cover no-repeat;
+    animation: rotation 2s infinite ease-in-out;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba($white, 0.9);
+    backdrop-filter: blur(1px);
+  }
+}
+
+// ----------------------------------------
+// Terms
+// ----------------------------------------
+
+.checkbox {
+  display: flex;
+  justify-content: flex-start;
+
+
+  input {
+    @include visually-hidden;
+  }
+
+  label {
+    font-size: 16px;
+    position: relative;
+    padding-left: 30px;
+    color: $black;
+    font-weight: 400;
+
+    a {
+      color: $brand;
+      text-decoration: underline;
+      transition: color $trans;
+
+      &:hover {
+          color: lighten($brand, 12%);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 1px solid $gray-dark;
+      border-radius: 3px;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      transition: border-color $trans;
+    }
+
+    &:after {
+      content: '';
+      width: 12px;
+      height: 9px;
+      background: $white;
+      display: block;
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      background: url('../images/svgs/check-simple.svg') center / cover no-repeat;
+      transform: scale(0);
+      transition: transform 0.4s $bounce;
+    }
+  }
+
+  input:checked + label {
+
+    &:before {
+      border: 1px solid $gray;
+    }
+
+    &:after {
+      transform: scale(1)
+    }
+  }
+}
